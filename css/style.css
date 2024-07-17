@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+h1 {
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    
+    width: 500px;
+
+    margin: auto;
+}
+
+main .card {
+    flex-basis: 150px;
+    height: 115px;
+
+    border: 1px solid black;
+
+    background-color: aquamarine;
+}
