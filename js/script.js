@@ -80,7 +80,19 @@ function shuffleCards() {
     }
 }
 
+function viewCard(index) {
+    HTMLcard[index].tagImg.classList.add('visivel')
+
+    setTimeout(() => HTMLcard[index].tagImg.classList.remove('visivel'),2000) //Anotar sobre setTimeout
+}
+
+for (let pos in HTMLcard) {
+    HTMLcard[pos].conteiner.addEventListener('click',() => viewCard(pos))
+}
+
 shuffleCards()
+
+
  
 
 
