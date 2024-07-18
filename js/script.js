@@ -1,8 +1,8 @@
 const HTMLcard = []
 
 //card conterá 12 objetos com 2 propriedades (conteiner da carta,tag img da carta)
-for (let pos in document.getElementsByClassName('card')){
-    HTMLcard.push({conteiner:document.getElementsByClassName('card')[pos],Tagimg:document.getElementsByTagName('img')[pos]})
+for (let pos = 0;pos <= 11;pos++ ){
+    HTMLcard.push({conteiner:document.getElementsByClassName('card')[pos],tagImg:document.getElementsByTagName('img')[pos]})
 }
 
 const card = [
@@ -20,31 +20,67 @@ const card = [
     'images/violino.jpg'     
 ]
 
-const returnedNumbers = []
-let randomNumber = null
+
+const possibleRandomNumbers = [0,1,2,3,4,5,6,7,8,9,10,11]
+
+function CheckIfThereAreLargerNumbersNotReturned(number) {
+    while (number <= 11) {
+        if (possibleRandomNumbers.indexOf(number) != -1) {
+            possibleRandomNumbers[possibleRandomNumbers.indexOf(number)] = 'retornado'
+            return number    
+        } else {
+            number +=1
+        }
+    }
+
+    //Se não houver nenhum número maior do que o randomNumber ainda não retornado então essa função retorna undefined
+}
+
+function CheckIfThereAreSmallerNumbersNotReturned(number) {
+    while (number >= 0) {
+        if (possibleRandomNumbers.indexOf(number) != -1) {
+            possibleRandomNumbers[possibleRandomNumbers.indexOf(number)] = 'retornado'
+            return number    
+        } else {
+            number -=1
+        }
+    }
+
+
+}
 
 function generateRandomNumber() {
-    //Gerar número aletório entre 0 e 11
+    //Gerar número aletório entre 0 e 11 (geração única)
 
-    let randomNumber = Math.floor(12*Math.random())
-    
-    if (returnedNumbers.indexOf(randomNumber) == -1) {
-        returnedNumbers.push(randomNumber)
+    let randomNumber = Math.floor(12*Math.random()) //Anotar sobre random
+
+    //Verificar se o randomNumber foi utilizado
+    if (possibleRandomNumbers.indexOf(randomNumber) != -1) {
+        possibleRandomNumbers[possibleRandomNumbers.indexOf(randomNumber)] = 'retornado'
         return randomNumber
-    } 
+    } else {
+        //randomNumber já utilizado -> verificação se há números maiores que o randomNumber disponíveis
+        let returnCheckIfThereAreLargerNumbersNotReturned = CheckIfThereAreLargerNumbersNotReturned(randomNumber+1)
+        if (returnCheckIfThereAreLargerNumbersNotReturned != undefined) {
+            return returnCheckIfThereAreLargerNumbersNotReturned
+        } else {
+            //Não há números maiores disponíveis -> verificação se há números menores que o randomNumber disponíveis
+            return CheckIfThereAreSmallerNumbersNotReturned(randomNumber-1)
+        }
+    }
+    
     
 }
 
+function shuffleCards() {
+    for (let pos in HTMLcard) {
+        let randomNumber = generateRandomNumber()
 
-for (let pos in HTMLcard) {
-    // do {
-    //     randomNumber = generateRandomNumber()
-    // } while (randomNumber == undefined)
-
-    //Não sei como vou gerar uma sequência de 12 números aleatórios sem forçar a memória do pc
-
-    HTMLcard[pos].Tagimg.setAttribute('src',card[pos])
+        HTMLcard[pos].tagImg.setAttribute('src',`${card[randomNumber]}`)
+    }
 }
+
+shuffleCards()
  
 
 
