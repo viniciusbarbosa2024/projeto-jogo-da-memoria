@@ -6,22 +6,24 @@ for (let pos = 0;pos <= 11;pos++ ){
 }
 
 const card = [
-    'images/acordeon.jpg',
-    'images/bateria.jpg',
-    'images/guitarra.jpg',
-    'images/piano.jpg',
-    'images/violao.jpg',
-    'images/violino.jpg',
-    'images/acordeon.jpg',
-    'images/bateria.jpg',
-    'images/guitarra.jpg',
-    'images/piano.jpg',
-    'images/violao.jpg',
-    'images/violino.jpg'     
+    {nome:'acordeon',img:'images/acordeon.jpg'},
+    {nome:'bateria',img:'images/bateria.jpg'},
+    {nome:'guitarra',img:'images/guitarra.jpg'},
+    {nome:'piano',img:'images/piano.jpg'},
+    {nome:'violao',img:'images/violao.jpg'},
+    {nome:'violino',img:'images/violino.jpg'},
+    {nome:'acordeon',img:'images/acordeon.jpg'},
+    {nome:'bateria',img:'images/bateria.jpg'},
+    {nome:'guitarra',img:'images/guitarra.jpg'},
+    {nome:'piano',img:'images/piano.jpg'},
+    {nome:'violao',img:'images/violao.jpg'},
+    {nome:'violino',img:'images/violino.jpg'},        
 ]
 
 
 const possibleRandomNumbers = [0,1,2,3,4,5,6,7,8,9,10,11]
+
+const visiblePair = []
 
 function CheckIfThereAreLargerNumbersNotReturned(number) {
     while (number <= 11) {
@@ -76,7 +78,7 @@ function shuffleCards() {
     for (let pos in HTMLcard) {
         let randomNumber = generateRandomNumber()
 
-        HTMLcard[pos].tagImg.setAttribute('src',`${card[randomNumber]}`)
+        HTMLcard[pos].tagImg.setAttribute('src',`${card[randomNumber].img}`)
     }
 }
 
