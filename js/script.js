@@ -81,6 +81,13 @@ function shuffleCards() {
 }
 
 function viewCard(index) {
+    //Impedir que outras 2 ou mais cartas sejam visualizadas simultaniamente
+    for (let pos in HTMLcard) {
+        if (HTMLcard[pos].tagImg.className == 'visivel') {
+            return
+        }
+    }
+    
     HTMLcard[index].tagImg.classList.add('visivel')
 
     setTimeout(() => HTMLcard[index].tagImg.classList.remove('visivel'),2000) //Anotar sobre setTimeout
