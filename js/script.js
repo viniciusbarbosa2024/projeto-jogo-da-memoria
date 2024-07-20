@@ -99,12 +99,18 @@ function foundPair() {
     visiblePair[1].className = 'encontrado'
 }
 
+function hideCards() {
+    visiblePair[0].classList.remove('visivel')
+    visiblePair[1].classList.remove('visivel')
+}
+
 function compareCards() {
     if (visiblePair[0].classList[0] == visiblePair[1].classList[0]) {
         foundPair()
         replaceImgs()
     } else {
-        alert('Tente novamente')        
+        alert('Tente novamente')
+        hideCards()        
     }
     
     visiblePair.splice(0)
