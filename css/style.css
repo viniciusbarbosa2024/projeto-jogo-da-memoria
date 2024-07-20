@@ -28,6 +28,10 @@ main .card img {
     display: none;
 }
 
-main .card img.visivel {
+main .card img.visivel  {
+    display: inline;
+}
+
+main .card img.encontrado {
     display: inline;
 }

@@ -93,8 +93,15 @@ function replaceImgs() {
     visiblePair[1].setAttribute('src','images/icone-de-verificacao.webp')
 }
 
+function foundPair() {
+    //Remove todas as classes da tag img associada a carta encontrada + adiciona a class 'encontrado'
+    visiblePair[0].className = 'encontrado'
+    visiblePair[1].className = 'encontrado'
+}
+
 function compareCards() {
     if (visiblePair[0].classList[0] == visiblePair[1].classList[0]) {
+        foundPair()
         replaceImgs()
     } else {
         alert('Tente novamente')        
@@ -111,6 +118,11 @@ for (let pos in HTMLcard) {
 shuffleCards()
 
 function generalFunction(index) {
+    //Evitar que haja execução da função para cartas já encontradas
+    if (HTMLcard[index].tagImg.className == 'encontrado') {
+        return
+    }
+    
     visiblePair.push(HTMLcard[index].tagImg)
 
     if (visiblePair.length <=2) {
