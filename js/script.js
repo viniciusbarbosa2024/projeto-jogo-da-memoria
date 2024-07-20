@@ -95,11 +95,12 @@ function replaceImgs() {
 
 function compareCards() {
     if (visiblePair[0].classList[0] == visiblePair[1].classList[0]) {
-        setTimeout(replaceImgs,2000)
+        replaceImgs()
     } else {
-        //Terminar caso de cartas diferentes
+        alert('Tente novamente')        
     }
     
+    visiblePair.splice(0)
 }
 
 
@@ -118,8 +119,7 @@ function generalFunction(index) {
 
 
     if (visiblePair.length == 2) {
-        compareCards()
-        setTimeout(() => visiblePair.splice(0),2000)  //Estudar sobre o problema do setTimeout      
+        setTimeout(compareCards,1000)      
     }
     
 }
