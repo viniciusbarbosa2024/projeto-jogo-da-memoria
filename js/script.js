@@ -78,21 +78,54 @@ function shuffleCards() {
     for (let pos in HTMLcard) {
         let randomNumber = generateRandomNumber()
 
+        HTMLcard[pos].tagImg.classList.add(`${card[randomNumber].nome}`)
         HTMLcard[pos].tagImg.setAttribute('src',`${card[randomNumber].img}`)
     }
 }
 
 function viewCard(index) {
     HTMLcard[index].tagImg.classList.add('visivel')
-
-    //Preciso que seja visível apenas um par de cartas
 }
 
+function replaceImgs() {
+    //Adiciona a imagem com ícone de verificação
+    visiblePair[0].setAttribute('src','images/icone-de-verificacao.webp')
+    visiblePair[1].setAttribute('src','images/icone-de-verificacao.webp')
+}
+
+function compareCards() {
+    if (visiblePair[0].classList[0] == visiblePair[1].classList[0]) {
+        setTimeout(replaceImgs,2000)
+    } else {
+        //Terminar caso de cartas diferentes
+    }
+    
+}
+
+
 for (let pos in HTMLcard) {
-    HTMLcard[pos].conteiner.addEventListener('click',() => viewCard(pos))
+    HTMLcard[pos].conteiner.addEventListener('click',() => generalFunction(pos))
 }
 
 shuffleCards()
+
+function generalFunction(index) {
+    visiblePair.push(HTMLcard[index].tagImg)
+
+    if (visiblePair.length <=2) {
+        viewCard(index)
+    }
+
+
+    if (visiblePair.length == 2) {
+        compareCards()
+        setTimeout(() => visiblePair.splice(0),2000)  //Estudar sobre o problema do setTimeout      
+    }
+    
+}
+
+
+
 
 
  
