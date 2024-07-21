@@ -1,3 +1,7 @@
+const gameStatus = document.getElementById('gameStatus')
+
+const numberOfPairsFound = document.getElementById('numberOfPairsFound')
+
 const HTMLcard = []
 
 //card conterá 12 objetos com 2 propriedades (conteiner da carta,tag img da carta)
@@ -100,8 +104,26 @@ function foundPair() {
 }
 
 function hideCards() {
+    //oculta as cartas
     visiblePair[0].classList.remove('visivel')
     visiblePair[1].classList.remove('visivel')
+}
+
+function displayNumberOfPairsFound() {
+    let DoubleNumberOfPairsFound = 0
+    for (let pos in HTMLcard) {
+        if (HTMLcard[pos].tagImg.className == 'encontrado') {
+            DoubleNumberOfPairsFound +=1
+        }
+    }
+
+    numberOfPairsFound.innerHTML = DoubleNumberOfPairsFound/2
+}
+
+function congratulations() {
+    if (numberOfPairsFound.innerHTML == 6) {
+        gameStatus.innerHTML = 'Parabéns,você encontrou todas as combinações!'
+    }
 }
 
 function compareCards() {
@@ -113,6 +135,7 @@ function compareCards() {
         hideCards()        
     }
     
+    displayNumberOfPairsFound()
     visiblePair.splice(0)
 }
 
@@ -139,6 +162,8 @@ function generalFunction(index) {
     if (visiblePair.length == 2) {
         setTimeout(compareCards,1000)      
     }
+
+    setTimeout(congratulations,1000)
     
 }
 
