@@ -2,7 +2,6 @@
 
 * {
     margin: 0px;
-    padding-left: 5px;
     box-sizing: border-box;
 }
 
@@ -12,6 +11,10 @@ body {
 
 h1 {
     text-align: center;
+}
+
+h2 {
+    padding-left: 5px;
 }
 
 main {
