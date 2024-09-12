@@ -126,19 +126,6 @@ function congratulations() {
     }
 }
 
-function compareCards() {
-    if (visiblePair[0].classList[0] == visiblePair[1].classList[0]) {
-        foundPair()
-        replaceImgs()
-    } else {
-        alert('Tente novamente')
-        hideCards()        
-    }
-    
-    displayNumberOfPairsFound()
-    visiblePair.splice(0)
-}
-
 
 for (let pos in HTMLcard) {
     HTMLcard[pos].conteiner.addEventListener('click',() => generalFunction(pos))
@@ -160,7 +147,25 @@ function generalFunction(index) {
 
 
     if (visiblePair.length == 2) {
-        setTimeout(compareCards,1000)      
+        const promise = new Promise((resolve,reject) => {
+            setTimeout(() => {
+                 if (visiblePair[0].classList[0] == visiblePair[1].classList[0]) {
+                    resolve('equalPair')
+                } else {
+                    reject('diferentPair')        
+                }},1000)
+        })  
+        
+        promise.then(() => {
+            foundPair()
+            replaceImgs()
+        }).catch(()=> {
+            alert('Tente novamente')
+            hideCards()
+        }).finally(()=> {
+            displayNumberOfPairsFound()
+            visiblePair.splice(0)
+        }) 
     }
 
     setTimeout(congratulations,1000)
